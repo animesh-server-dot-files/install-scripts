@@ -36,3 +36,14 @@ module load go/1.16.4
 go get -u -ldflags="-s -w" github.com/gokcehan/lf
 go get github.com/cov-ert/gofasta
 echo "Completed"
+
+echo "Building UShER"
+cd modules/usher/v0.3/source
+mkdir -p usher_build && cd usher_build
+cmake -DTBB_DIR=${PWD}/../oneTBB-2019_U9  -DCMAKE_PREFIX_PATH=${PWD}/../oneTBB-2019_U9/cmake ..
+make -j 20
+mkdir -p ../../package
+cp parsimony.pb.h parsimony.pb.cc matOptimize usher matUtils ../../package/
+cd ../..
+rm -rf source/usher_build source/oneTBB-2019_U9/cmake/TBBConfig.cmake source/oneTBB-2019_U9/cmake/TBBConfigVersion.cmake
+echo "Completed"
