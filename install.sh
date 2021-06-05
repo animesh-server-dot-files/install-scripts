@@ -28,6 +28,7 @@ export MODULE_PREFIX="$HOME/Installed_Package"
 echo "Downloading all required modules"
 git clone --recursive https://github.com/animesh-server-dot-files/modules.git
 . $MODULE_PREFIX/environment_modules/init/bash
+export MODULE_PREFIX="$HOME/Installed_Package"
 echo "Completed"
 
 echo "Downloading and Building required go packages"
