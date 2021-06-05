@@ -54,7 +54,7 @@ conda create -n python_2.7 python=2.7
 conda config --add channels conda-forge
 conda config --add channels bioconda
 conda activate python_3.9
-conda install mafft iqtree minimap2
+conda install --yes mafft iqtree minimap2
 conda deactivate
 module unload anaconda/3-2021.05
 echo "Completed"
