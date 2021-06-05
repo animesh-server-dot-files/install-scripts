@@ -22,27 +22,44 @@ export MODULE_PREFIX="$HOME/Installed_Package"
 # make -j 20 && make install
 # cd ..
 # rm -rf v4.7.1.tar.gz modules-4.7.1 $MODULE_PREFIX/modules
-cd $MODULE_PREFIX
+# cd $MODULE_PREFIX
 # echo "Completed"
 
-echo "Downloading all required modules"
-git clone --recursive https://github.com/animesh-server-dot-files/modules.git
+# echo "Downloading all required modules"
+# git clone --recursive https://github.com/animesh-server-dot-files/modules.git
 . $MODULE_PREFIX/environment_modules/init/bash
+# echo "Completed"
+
+# echo "Downloading and Building required go packages"
+# module load go/1.16.4
+# go get -u -ldflags="-s -w" github.com/gokcehan/lf
+# go get github.com/cov-ert/gofasta
+# echo "Completed"
+
+# echo "Building UShER"
+# cd modules/usher/v0.3/source
+# mkdir -p usher_build && cd usher_build
+# cmake -DTBB_DIR=${PWD}/../oneTBB-2019_U9  -DCMAKE_PREFIX_PATH=${PWD}/../oneTBB-2019_U9/cmake ..
+# make -j 20
+# mkdir -p ../../package
+# cp parsimony.pb.h parsimony.pb.cc matOptimize usher matUtils ../../package/
+# cd ../..
+# rm -rf source/usher_build source/oneTBB-2019_U9/cmake/TBBConfig.cmake source/oneTBB-2019_U9/cmake/TBBConfigVersion.cmake
+# echo "Completed"
+
+echo "Configuring Anaconda and Installing required packages"
+module load anaconda/3-2021.05
+conda create -n python_3.9 python=3.9
+conda create -n python_2.7 python=2.7
+conda config --add channels conda-forge
+conda config --add channels bioconda
+conda activate python_3.9
+conda install mafft iqtree minimap2
+conda deactivate
+module unload anaconda/3-2021.05
 echo "Completed"
 
-echo "Downloading and Building required go packages"
-module load go/1.16.4
-go get -u -ldflags="-s -w" github.com/gokcehan/lf
-go get github.com/cov-ert/gofasta
-echo "Completed"
-
-echo "Building UShER"
-cd modules/usher/v0.3/source
-mkdir -p usher_build && cd usher_build
-cmake -DTBB_DIR=${PWD}/../oneTBB-2019_U9  -DCMAKE_PREFIX_PATH=${PWD}/../oneTBB-2019_U9/cmake ..
-make -j 20
-mkdir -p ../../package
-cp parsimony.pb.h parsimony.pb.cc matOptimize usher matUtils ../../package/
-cd ../..
-rm -rf source/usher_build source/oneTBB-2019_U9/cmake/TBBConfig.cmake source/oneTBB-2019_U9/cmake/TBBConfigVersion.cmake
+echo "Installing required python packages"
+module load python/3.9.5
+pip install nextstrain-augur snakemake git+https://github.com/cov-lineages/pangolin.git git+https://github.com/cov-lineages/pangoLEARN.git git+https://github.com/cov-lineages/scorpio.git git+https://github.com/cov-lineages/constellations.git
 echo "Completed"
