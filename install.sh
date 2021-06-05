@@ -1,13 +1,15 @@
 #!/bin/bash
 export MODULE_PREFIX="$HOME/Installed_Package"
 
-
-sudo echo -e "#Host only network\nauto enp0s8\niface enp0s8 inet static\n\t\taddress 192.168.56.105\n\t\tnetmask 255.255.255.0\n\t\tnetwork 192.168.56.0\n\t\tbroadcast 192.168.56.255" >> /etc/network/interfaces
-
 echo "Updating all packages"
 sudo apt update
 sudo apt --yes upgrade
 sudo apt install --yes ifupdown virtualenv sshfs tcl tk tcl-dev tk-dev build-essential wget cmake libboost-all-dev libprotoc-dev libprotoc-dev libbz2-dev protobuf-compiler rsync
+echo "Completed"
+
+echo "Creating Host-Only-Network"
+sudo echo -e "#Host only network\nauto enp0s8\niface enp0s8 inet static\n\t\taddress 192.168.56.106\n\t\tnetmask 255.255.255.0\n\t\tnetwork 192.168.56.0\n\t\tbroadcast 192.168.56.255" >> /etc/network/interfaces
+sudo ifup enp0s8
 echo "Completed"
 
 echo "Downloading Anaconda 3 Edition 2021-05"
