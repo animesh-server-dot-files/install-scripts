@@ -4,7 +4,7 @@ export MODULE_PREFIX="$HOME/Installed_Package"
 echo "Updating all packages"
 sudo apt update
 sudo apt --yes upgrade
-sudo apt install --yes sshfs tcl tk tcl-dev tk-dev build-essential wget cmake libboost-all-dev libprotoc-dev libprotoc-dev libbz2-dev protobuf-compiler rsync
+sudo apt install --yes virtualenv sshfs tcl tk tcl-dev tk-dev build-essential wget cmake libboost-all-dev libprotoc-dev libprotoc-dev libbz2-dev protobuf-compiler rsync
 echo "Completed"
 
 echo "Downloading Anaconda 3 Edition 2021-05"
@@ -49,8 +49,8 @@ echo "Completed"
 
 echo "Configuring Anaconda and Installing required packages"
 module load anaconda/3-2021.05
-conda create -n python_3.9 python=3.9
-conda create -n python_2.7 python=2.7
+conda create --yes -n python_3.9 python=3.9
+conda create --yes -n python_2.7 python=2.7
 conda config --add channels conda-forge
 conda config --add channels bioconda
 conda activate python_3.9
@@ -66,4 +66,10 @@ pip install git+https://github.com/cov-lineages/pangolin.git
 pip install git+https://github.com/cov-lineages/pangoLEARN.git 
 pip install git+https://github.com/cov-lineages/scorpio.git 
 pip install git+https://github.com/cov-lineages/constellations.git
+echo "Completed"
+
+echo "Appending lines to bashrc"
+echo 'export MODULE_PREFIX="$HOME/Installed_Package"' >> ~/.bashrc
+echo '. $MODULE_PREFIX/environment_modules/init/bash' >> ~/.bashrc
+echo `alias lf='lf --last-dir-path=$HOME/.lsdir; LASTDIR="cat $HOME/.lsdir"; cd "$LASTDIR"'` >> ~/.bashrc
 echo "Completed"
