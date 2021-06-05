@@ -22,7 +22,7 @@ export MODULE_PREFIX="$HOME/Installed_Package"
 # make -j 20 && make install
 # cd ..
 # rm -rf v4.7.1.tar.gz modules-4.7.1 $MODULE_PREFIX/modules
-# cd $MODULE_PREFIX
+cd $MODULE_PREFIX
 # echo "Completed"
 
 echo "Downloading all required modules"
