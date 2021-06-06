@@ -73,6 +73,10 @@ pip install git+https://github.com/cov-lineages/scorpio.git
 pip install git+https://github.com/cov-lineages/constellations.git
 echo "Completed"
 
+echo "Installing Rclone"
+curl https://rclone.org/install.sh | sudo bash
+echo "Completed"
+
 echo "Appending lines to bashrc"
 echo 'export MODULE_PREFIX="$HOME/Installed_Package"' >> ~/.bashrc
 echo '. $MODULE_PREFIX/environment_modules/init/bash' >> ~/.bashrc
