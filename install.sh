@@ -4,7 +4,7 @@ export MODULE_PREFIX="$HOME/Installed_Package"
 echo "Updating all packages"
 sudo apt update
 sudo apt --yes upgrade
-sudo apt install --yes ifupdown virtualenv sshfs tcl tk tcl-dev tk-dev build-essential wget cmake libboost-all-dev libprotoc-dev libprotoc-dev libbz2-dev protobuf-compiler rsync
+sudo apt install --yes nginx ifupdown virtualenv sshfs tcl tk tcl-dev tk-dev build-essential wget cmake libboost-all-dev libprotoc-dev libprotoc-dev libbz2-dev protobuf-compiler rsync
 echo "Completed"
 
 echo "Creating Host-Only-Network"
