@@ -48,14 +48,14 @@ conda create --yes -n python_2.7 python=2.7
 conda config --add channels conda-forge
 conda config --add channels bioconda
 conda activate python_3.9
-conda install --yes mafft iqtree minimap2
+conda install --yes mafft iqtree minimap2 cmake protobuf gcc_linux-64 git
 conda deactivate
 module unload anaconda/3-2021.05
 echo "Completed"
 
 echo "Installing required python packages"
 module load python/3.9.5
-pip install nextstrain-augur snakemake tqdm
+pip install nextstrain-augur snakemake==6.3.0 tqdm bpytop cython fuzzyset arrow pendulum biopython pytools
 pip install git+https://github.com/cov-lineages/pangolin.git 
 pip install git+https://github.com/cov-lineages/pangoLEARN.git 
 pip install git+https://github.com/cov-lineages/scorpio.git 
