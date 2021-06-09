@@ -66,7 +66,7 @@ echo "Completed"
 
 echo "Installing required python packages"
 module load python/3.9.5
-pip install nextstrain-augur snakemake tqdm
+pip install nextstrain-augur snakemake==6.3.0 tqdm bpytop
 pip install git+https://github.com/cov-lineages/pangolin.git 
 pip install git+https://github.com/cov-lineages/pangoLEARN.git 
 pip install git+https://github.com/cov-lineages/scorpio.git 
@@ -78,6 +78,6 @@ curl https://rclone.org/install.sh | sudo bash
 echo "Completed"
 
 echo "Appending lines to bashrc"
-echo 'export MODULE_PREFIX="$HOME/Installed_Package"' >> ~/.bashrc
-echo '. $MODULE_PREFIX/environment_modules/init/bash' >> ~/.bashrc
+echo 'export MODULE_PREFIX="$HOME/Installed_Package"' >> ~/.bash_profile
+echo '. $MODULE_PREFIX/environment_modules/init/bash' >> ~/.bash_profile
 echo "Completed"
