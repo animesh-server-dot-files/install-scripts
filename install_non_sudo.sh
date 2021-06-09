@@ -63,6 +63,6 @@ pip install git+https://github.com/cov-lineages/constellations.git
 echo "Completed"
 
 echo "Appending lines to bashrc"
-echo 'export MODULE_PREFIX="$HOME/Installed_Package"' >> ~/.bashrc
-echo '. $MODULE_PREFIX/environment_modules/init/bash' >> ~/.bashrc
+echo 'export MODULE_PREFIX="$HOME/Installed_Package"' >> ~/.bash_profile
+echo '. $MODULE_PREFIX/environment_modules/init/bash' >> ~/.bash_profile
 echo "Completed"
