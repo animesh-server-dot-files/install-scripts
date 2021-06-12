@@ -76,5 +76,5 @@ echo "Completed"
 echo "Appending lines to bashrc"
 echo 'export MODULE_PREFIX="$HOME/Installed_Package"' >> ~/.bash_profile
 echo '. $MODULE_PREFIX/environment_modules/init/bash' >> ~/.bash_profile
-echo "module load python/3.9.5 go/1.16.4 nextstrain/1.0.0_a9 usher/0.3" >> $MODULE_PREFIX/environment_modules/init/modulerc
+echo "module load python/3.9.5 golang/1.16.4 nextstrain/1.0.0_a9 usher/0.3" >> $MODULE_PREFIX/environment_modules/init/modulerc
 echo "Completed"
