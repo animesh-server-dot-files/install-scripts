@@ -21,11 +21,11 @@ echo "Completed"
 
 echo "Downloading all required modules"
 git clone --recursive https://github.com/animesh-server-dot-files/modules.git modules_source
-mkdir modules/python
-mkdir modules/golang
-mkdir modules/nextstrain
-mkdir modules/usher
-mkdir modules/anaconda
+mkdir -p modules/python
+mkdir -p modules/golang
+mkdir -p modules/nextstrain
+mkdir -p modules/usher
+mkdir -p modules/anaconda
 ln modules_source/python/3.9.5 modules/python/3.9.5
 ln modules_source/python/2.7.18 modules/python/2.7.18
 ln modules_source/golang/1.16.4 modules/golang/1.16.4
