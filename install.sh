@@ -31,12 +31,23 @@ cd $MODULE_PREFIX
 echo "Completed"
 
 echo "Downloading all required modules"
-git clone --recursive https://github.com/animesh-server-dot-files/modules.git
+git clone --recursive https://github.com/animesh-server-dot-files/modules.git modules_source
+mkdir -p modules/python
+mkdir -p modules/golang
+mkdir -p modules/nextstrain
+mkdir -p modules/usher
+mkdir -p modules/anaconda
+ln modules_source/python/3.9.5 modules/python/3.9.5
+ln modules_source/python/2.7.18 modules/python/2.7.18
+ln modules_source/golang/1.16.4 modules/golang/1.16.4
+ln modules_source/nextstrain/1.0.0_a9 modules/nextstrain/1.0.0_a9
+ln modules_source/usher/0.3 modules/usher/0.3
+ln modules_source/anaconda/3-2021.05 modules/anaconda/3-2021.05
 . $MODULE_PREFIX/environment_modules/init/bash
 echo "Completed"
 
 echo "Downloading and Building required go packages"
-module load go/1.16.4
+module load golang/1.16.4
 go get -u -ldflags="-s -w" github.com/gokcehan/lf
 go get github.com/cov-ert/gofasta
 echo "Completed"
@@ -80,5 +91,5 @@ echo "Completed"
 echo "Appending lines to bashrc"
 echo 'export MODULE_PREFIX="$HOME/Installed_Package"' >> ~/.bash_profile
 echo '. $MODULE_PREFIX/environment_modules/init/bash' >> ~/.bash_profile
-echo "module load python/3.9.5 go/1.16.4 nextstrain/1.0.0_a9 usher/0.3" >> $MODULE_PREFIX/environment_modules/init/modulerc
+echo "module load python/3.9.5 golang/1.16.4 nextstrain/1.0.0_a9 usher/0.3" >> $MODULE_PREFIX/environment_modules/init/modulerc
 echo "Completed"
