@@ -36,7 +36,7 @@ ln modules_source/anaconda/3-2021.05 modules/anaconda/3-2021.05
 echo "Completed"
 
 echo "Downloading and Building required go packages"
-module load go/1.16.4
+module load golang/1.16.4
 go get -u -ldflags="-s -w" github.com/gokcehan/lf
 go get github.com/cov-ert/gofasta
 echo "Completed"
