@@ -4,13 +4,19 @@ export MODULE_PREFIX="$HOME/Installed_Package"
 echo "Updating all packages"
 sudo apt update
 sudo apt --yes upgrade
-sudo apt install --yes nginx ifupdown virtualenv sshfs tcl tk tcl-dev tk-dev build-essential wget cmake libboost-all-dev libprotoc-dev libprotoc-dev libbz2-dev protobuf-compiler rsync
+sudo apt install --yes ntpdate nginx ifupdown virtualenv sshfs tcl tk tcl-dev tk-dev build-essential wget cmake libboost-all-dev libprotoc-dev libprotoc-dev libbz2-dev protobuf-compiler rsync
 echo "Completed"
 
 echo "Creating Host-Only-Network"
 echo -e "#Host only network\nauto enp0s8\niface enp0s8 inet static\n\t\taddress 192.168.56.106\n\t\tnetmask 255.255.255.0\n\t\tnetwork 192.168.56.0\n\t\tbroadcast 192.168.56.255" | sudo tee /etc/network/interfaces
 sudo ifup enp0s8
 echo "Completed"
+
+# echo "Setting Time"
+# timedatectl set-timezone 'Asia/Kolkata'
+# timedatectl set-time '14:14:43'
+# timedatectl set-ntp yes
+# echo "Completed"
 
 echo "Downloading Anaconda 3 Edition 2021-05"
 wget https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh
@@ -53,7 +59,7 @@ go get github.com/cov-ert/gofasta
 echo "Completed"
 
 echo "Building UShER"
-cd modules/usher/v0.3/source
+cd modules_source/usher/v0.3/source
 mkdir -p usher_build && cd usher_build
 cmake -DTBB_DIR=${PWD}/../oneTBB-2019_U9  -DCMAKE_PREFIX_PATH=${PWD}/../oneTBB-2019_U9/cmake ..
 make -j 20
@@ -77,8 +83,8 @@ echo "Completed"
 
 echo "Installing required python packages"
 module load python/3.9.5
-pip install nextstrain-augur snakemake==6.3.0 tqdm bpytop cython fuzzyset arrow pendulum biopython pytools openpyxl
-pip install git+https://github.com/cov-lineages/pangolin.git 
+pip install nextstrain-augur snakemake==6.3.0 tqdm bpytop cython arrow pendulum biopython pytools openpyxl
+pip install git+https://github.com/cov-lineages/pangolin.git fuzzyset
 pip install git+https://github.com/cov-lineages/pangoLEARN.git 
 pip install git+https://github.com/cov-lineages/scorpio.git 
 pip install git+https://github.com/cov-lineages/constellations.git
