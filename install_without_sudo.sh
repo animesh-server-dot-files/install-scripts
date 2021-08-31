@@ -26,14 +26,14 @@ if [[ ! -f "$HOME/install-scripts/logs/anaconda" ]]; then
 	center "${GREEN}Completed${NORMAL}"
 fi
 
-if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
+if [[ ! -f "$HOME/install-scripts/logs/env_module" ]]; then
 	center "${GREEN}Downloading Environment Module${NORMAL}"
 		wget https://github.com/cea-hpc/modules/archive/refs/tags/v4.7.1.tar.gz
 		tar -xvf v4.7.1.tar.gz
 		cd modules-4.7.1
 		./configure --prefix=$MODULE_PREFIX/environment_modules --modulefilesdir=$MODULE_PREFIX/modules
 		make -j 20 && make install
-		touch $HOME/install-scripts/logs/modules
+		touch $HOME/install-scripts/logs/env_module
 		cd $MODULE_PREFIX
 		# rm -rf v4.7.1.tar.gz modules-4.7.1 $MODULE_PREFIX/modules
 	center "${GREEN}Completed${NORMAL}"
@@ -54,13 +54,26 @@ if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 		mkdir -p modules/rclone
 		mkdir -p modules/samtools
 		mkdir -p modules/seqtk
+		ln modules_source/seqtk/1.3 modules/seqtk/1.3
 		ln modules_source/usher/0.3 modules/usher/0.3
+		ln modules_source/bwa/0.7.17 modules/bwa/0.7.17
+		ln modules_source/gatk/3.8.1.0 modules/gatk/3.8.1.0
+		ln modules_source/gatk/4.2.2.0 modules/gatk/4.2.2.0
+		ln modules_source/gatk/4.1.9.0 modules/gatk/4.1.9.0
+		ln modules_source/samtools/1.13 modules/samtools/1.13
+		ln modules_source/rclone/1.56.0 modules/rclone/1.56.0
+		ln modules_source/fastqc/0.11.9 modules/fastqc/0.11.9
+		ln modules_source/golang/1.16.4 modules/golang/1.16.4
 		ln modules_source/python/3.9.5 modules/python/3.9.5
 		ln modules_source/python/2.7.18 modules/python/2.7.18
-		ln modules_source/golang/1.16.4 modules/golang/1.16.4
+		ln modules_source/picard/2.24.0 modules/picard/2.24.0
+		ln modules_source/picard/2.26.0 modules/picard/2.26.0
 		ln modules_source/anaconda/3-2021.05 modules/anaconda/3-2021.05
+		ln modules_source/nextstrain/1.2.3 modules/nextstrain/1.2.3
 		ln modules_source/nextstrain/1.0.0_a9 modules/nextstrain/1.0.0_a9
+
 		. $MODULE_PREFIX/environment_modules/init/bash
+		touch $HOME/install-scripts/logs/modules
 	center "${GREEN}Completed${NORMAL}"
 fi
 
