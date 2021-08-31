@@ -5,6 +5,7 @@ mkdir -p logs
 
 if [[ ! -f "logs/anaconda" ]]; then
 	echo "Downloading Anaconda 3 Edition 2021-05"
+		rm -rf Anaconda3-2021.05-Linux-x86_64.sh
 		wget https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh
 		chmod +x Anaconda3-2021.05-Linux-x86_64.sh
 		./Anaconda3-2021.05-Linux-x86_64.sh -b -p $MODULE_PREFIX/anaconda3
