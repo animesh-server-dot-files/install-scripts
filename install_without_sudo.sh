@@ -3,8 +3,11 @@ set -e
 export MODULE_PREFIX="$HOME/Installed_Package"
 mkdir -p logs
 
-GREEN="\033[0;32m"
-NC="\033[0m"
+RED=$(tput setaf 1)
+NORMAL=$(tput sgr0)
+BLINK=$(tput blink)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
 
 center() {
 	termwidth="$(tput cols)"
