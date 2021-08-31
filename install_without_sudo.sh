@@ -3,7 +3,7 @@ set -e
 export MODULE_PREFIX="$HOME/Installed_Package"
 mkdir -p logs
 
-if [[ ! -f "logs/anaconda" ]]; then
+if [[ ! -f "$HOME/install-scripts/logs/anaconda" ]]; then
 	echo "Downloading Anaconda 3 Edition 2021-05"
 		rm -rf Anaconda3-2021.05-Linux-x86_64.sh
 		wget https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh
@@ -14,16 +14,18 @@ if [[ ! -f "logs/anaconda" ]]; then
 	echo "Completed"
 fi
 
-# echo "Downloading Environment Module"
-# 	wget https://github.com/cea-hpc/modules/archive/refs/tags/v4.7.1.tar.gz
-# 	tar -xvf v4.7.1.tar.gz
-# 	cd modules-4.7.1
-# 	./configure --prefix=$MODULE_PREFIX/environment_modules --modulefilesdir=$MODULE_PREFIX/modules
-# 	make -j 20 && make install
-# 	cd ..
-# 	rm -rf v4.7.1.tar.gz modules-4.7.1 $MODULE_PREFIX/modules
-# 	cd $MODULE_PREFIX
-# echo "Completed"
+# if [[ ! -f "logs/modules" ]]; then
+# 	echo "Downloading Environment Module"
+# 		wget https://github.com/cea-hpc/modules/archive/refs/tags/v4.7.1.tar.gz
+# 		tar -xvf v4.7.1.tar.gz
+# 		cd modules-4.7.1
+# 		./configure --prefix=$MODULE_PREFIX/environment_modules --modulefilesdir=$MODULE_PREFIX/modules
+# 		make -j 20 && make install
+# 		touch logs/anaconda
+# 		cd $MODULE_PREFIX
+# 		# rm -rf v4.7.1.tar.gz modules-4.7.1 $MODULE_PREFIX/modules
+# 	echo "Completed"
+# fi
 
 # echo "Downloading all required modules"
 # 	git clone --recursive https://github.com/animesh-server-dot-files/modules.git modules_source
