@@ -6,15 +6,21 @@ mkdir -p logs
 GREEN="\033[0;32m"
 NC="\033[0m"
 
+center() {
+	termwidth="$(tput cols)"
+	padding="$(printf '%0.1s' ={1..500})"
+	printf '%*.*s %s %*.*s\n' 0 "$(((termwidth-2-${#1})/2))" "$padding" "$1" 0 "$(((termwidth-1-${#1})/2))" "$padding"
+}
+
 if [[ ! -f "$HOME/install-scripts/logs/anaconda" ]]; then
-	echo -e "${GREEN}Downloading Anaconda 3 Edition 2021-05${NC}"
-		rm -rf Anaconda3-2021.05-Linux-x86_64.sh
-		wget https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh
-		chmod +x Anaconda3-2021.05-Linux-x86_64.sh
-		./Anaconda3-2021.05-Linux-x86_64.sh -b -p $MODULE_PREFIX/anaconda3
-		touch logs/anaconda
+	center "${GREEN}Downloading Anaconda 3 Edition 2021-05${NC}"
 		# rm -rf Anaconda3-2021.05-Linux-x86_64.sh
-	echo -e "${GREEN}Completed${NC}"
+		# wget https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh
+		# chmod +x Anaconda3-2021.05-Linux-x86_64.sh
+		# ./Anaconda3-2021.05-Linux-x86_64.sh -b -p $MODULE_PREFIX/anaconda3
+		# touch logs/anaconda
+		# rm -rf Anaconda3-2021.05-Linux-x86_64.sh
+	center -e "${GREEN}Completed${NC}"
 fi
 
 # if [[ ! -f "logs/modules" ]]; then
