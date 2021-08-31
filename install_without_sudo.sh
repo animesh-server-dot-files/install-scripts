@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 export MODULE_PREFIX="$HOME/Installed_Package"
+TEMP_DIR='temp'
 mkdir -p logs
+mkdir -p $TEMP_DIR
 
 RED=$(tput setaf 1)
 NORMAL=$(tput sgr0)
@@ -17,10 +19,10 @@ center() {
 
 if [[ ! -f "$HOME/install-scripts/logs/anaconda" ]]; then
 	center "${GREEN}Downloading Anaconda 3 Edition 2021-05${NORMAL}"
-		rm -rf Anaconda3-2021.05-Linux-x86_64.sh
-		wget https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh
-		chmod +x Anaconda3-2021.05-Linux-x86_64.sh
-		./Anaconda3-2021.05-Linux-x86_64.sh -b -p $MODULE_PREFIX/anaconda3
+		rm -rf ${TEMP_DIR}/Anaconda3-2021.05-Linux-x86_64.sh
+		wget https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh -P ${TEMP_DIR}
+		chmod +x ${TEMP_DIR}/Anaconda3-2021.05-Linux-x86_64.sh
+		sh ${TEMP_DIR}/Anaconda3-2021.05-Linux-x86_64.sh -b -p $MODULE_PREFIX/anaconda3
 		touch $HOME/install-scripts/logs/anaconda
 		# rm -rf Anaconda3-2021.05-Linux-x86_64.sh
 	center "${GREEN}Completed${NORMAL}"
@@ -28,12 +30,13 @@ fi
 
 if [[ ! -f "$HOME/install-scripts/logs/env_module" ]]; then
 	center "${GREEN}Downloading Environment Module${NORMAL}"
-		wget https://github.com/cea-hpc/modules/archive/refs/tags/v4.7.1.tar.gz
-		tar -xvf v4.7.1.tar.gz
-		cd modules-4.7.1
+		wget https://github.com/cea-hpc/modules/archive/refs/tags/v4.7.1.tar.gz -P ${TEMP_DIR}
+		tar -xvf ${TEMP_DIR}/v4.7.1.tar.gz
+		cd ${TEMP_DIR}/modules-4.7.1
 		./configure --prefix=$MODULE_PREFIX/environment_modules --modulefilesdir=$MODULE_PREFIX/modules
 		make -j 20 && make install
 		touch $HOME/install-scripts/logs/env_module
+		rm -rf $MODULE_PREFIX/modules
 		# rm -rf v4.7.1.tar.gz modules-4.7.1 $MODULE_PREFIX/modules
 	center "${GREEN}Completed${NORMAL}"
 fi
@@ -41,7 +44,6 @@ fi
 if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 	center "${GREEN}Downloading all required modules${NORMAL}"
 		cd $MODULE_PREFIX
-		# rm -rf modules_source
 		if [[ ! -d "$MODULE_PREFIX/modules_source" ]]; then
 			git clone --recursive https://github.com/animesh-server-dot-files/modules.git modules_source
 		else
