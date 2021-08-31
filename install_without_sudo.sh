@@ -41,6 +41,7 @@ fi
 
 if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 	center "${GREEN}Downloading all required modules${NORMAL}"
+		rm -rf modules_source
 		git clone --recursive https://github.com/animesh-server-dot-files/modules.git modules_source
 		mkdir -p modules/python
 		mkdir -p modules/golang
