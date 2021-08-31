@@ -23,7 +23,7 @@ if [[ ! -f "$HOME/install-scripts/logs/anaconda" ]]; then
 		# ./Anaconda3-2021.05-Linux-x86_64.sh -b -p $MODULE_PREFIX/anaconda3
 		# touch logs/anaconda
 		# rm -rf Anaconda3-2021.05-Linux-x86_64.sh
-	center -e "${GREEN}Completed${NORMAL}"
+	center "${GREEN}Completed${NORMAL}"
 fi
 
 # if [[ ! -f "logs/modules" ]]; then
