@@ -3,15 +3,18 @@ set -e
 export MODULE_PREFIX="$HOME/Installed_Package"
 mkdir -p logs
 
+GREEN="\033[0;32m"
+NC="\033[0m"
+
 if [[ ! -f "$HOME/install-scripts/logs/anaconda" ]]; then
-	echo "Downloading Anaconda 3 Edition 2021-05"
+	echo -e "${GREEN}Downloading Anaconda 3 Edition 2021-05${NC}"
 		rm -rf Anaconda3-2021.05-Linux-x86_64.sh
 		wget https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh
 		chmod +x Anaconda3-2021.05-Linux-x86_64.sh
 		./Anaconda3-2021.05-Linux-x86_64.sh -b -p $MODULE_PREFIX/anaconda3
 		touch logs/anaconda
 		# rm -rf Anaconda3-2021.05-Linux-x86_64.sh
-	echo "Completed"
+	echo -e "${GREEN}Completed${NC}"
 fi
 
 # if [[ ! -f "logs/modules" ]]; then
