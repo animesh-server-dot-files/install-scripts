@@ -41,7 +41,7 @@ fi
 if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 	center "${GREEN}Downloading all required modules${NORMAL}"
 		cd $MODULE_PREFIX
-		rm -rf modules_source
+		# rm -rf modules_source
 		if [[ ! -d "$MODULE_PREFIX/modules_source" ]]; then
 			git clone --recursive https://github.com/animesh-server-dot-files/modules.git modules_source
 		else
