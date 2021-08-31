@@ -34,15 +34,19 @@ if [[ ! -f "$HOME/install-scripts/logs/env_module" ]]; then
 		./configure --prefix=$MODULE_PREFIX/environment_modules --modulefilesdir=$MODULE_PREFIX/modules
 		make -j 20 && make install
 		touch $HOME/install-scripts/logs/env_module
-		cd $MODULE_PREFIX
 		# rm -rf v4.7.1.tar.gz modules-4.7.1 $MODULE_PREFIX/modules
 	center "${GREEN}Completed${NORMAL}"
 fi
 
 if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 	center "${GREEN}Downloading all required modules${NORMAL}"
+		cd $MODULE_PREFIX
 		rm -rf modules_source
-		git clone --recursive https://github.com/animesh-server-dot-files/modules.git modules_source
+		if [[ ! -d "$MODULE_PREFIX/modules_source" ]]; then
+			git clone --recursive https://github.com/animesh-server-dot-files/modules.git modules_source
+		else
+			cd modules_source && git pull --recurse-submodules
+		fi
 		mkdir -p modules/python
 		mkdir -p modules/golang
 		mkdir -p modules/nextstrain
