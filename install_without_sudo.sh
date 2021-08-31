@@ -11,7 +11,7 @@ YELLOW=$(tput setaf 3)
 
 center() {
 	termwidth="$(tput cols)"
-	padding="$(printf '%0.1s' ={1..500})"
+	padding="$(printf '%0.1s' -{1..500})"
 	printf '%*.*s %s %*.*s\n' 0 "$(((termwidth-2-${#1})/2))" "$padding" "$1" 0 "$(((termwidth-1-${#1})/2))" "$padding"
 }
 
@@ -39,28 +39,30 @@ if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 	center "${GREEN}Completed${NORMAL}"
 fi
 
-# echo "Downloading all required modules"
-# 	git clone --recursive https://github.com/animesh-server-dot-files/modules.git modules_source
-# 	mkdir -p modules/python
-# 	mkdir -p modules/golang
-# 	mkdir -p modules/nextstrain
-# 	mkdir -p modules/usher
-# 	mkdir -p modules/anaconda
-# 	mkdir -p modules/bwa
-# 	mkdir -p modules/fastqc
-# 	mkdir -p modules/gatk
-# 	mkdir -p modules/picard
-# 	mkdir -p modules/rclone
-# 	mkdir -p modules/samtools
-# 	mkdir -p modules/seqtk
-# 	ln modules_source/usher/0.3 modules/usher/0.3
-# 	ln modules_source/python/3.9.5 modules/python/3.9.5
-# 	ln modules_source/python/2.7.18 modules/python/2.7.18
-# 	ln modules_source/golang/1.16.4 modules/golang/1.16.4
-# 	ln modules_source/anaconda/3-2021.05 modules/anaconda/3-2021.05
-# 	ln modules_source/nextstrain/1.0.0_a9 modules/nextstrain/1.0.0_a9
-# 	. $MODULE_PREFIX/environment_modules/init/bash
-# echo "Completed"
+if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
+	center "${GREEN}Downloading all required modules${NORMAL}"
+		git clone --recursive https://github.com/animesh-server-dot-files/modules.git modules_source
+		mkdir -p modules/python
+		mkdir -p modules/golang
+		mkdir -p modules/nextstrain
+		mkdir -p modules/usher
+		mkdir -p modules/anaconda
+		mkdir -p modules/bwa
+		mkdir -p modules/fastqc
+		mkdir -p modules/gatk
+		mkdir -p modules/picard
+		mkdir -p modules/rclone
+		mkdir -p modules/samtools
+		mkdir -p modules/seqtk
+		ln modules_source/usher/0.3 modules/usher/0.3
+		ln modules_source/python/3.9.5 modules/python/3.9.5
+		ln modules_source/python/2.7.18 modules/python/2.7.18
+		ln modules_source/golang/1.16.4 modules/golang/1.16.4
+		ln modules_source/anaconda/3-2021.05 modules/anaconda/3-2021.05
+		ln modules_source/nextstrain/1.0.0_a9 modules/nextstrain/1.0.0_a9
+		. $MODULE_PREFIX/environment_modules/init/bash
+	center "${GREEN}Completed${NORMAL}"
+fi
 
 # echo "Building BWA"
 # 	cd $MODULE_PREFIX/modules_source/bwa/v0.7.17/
