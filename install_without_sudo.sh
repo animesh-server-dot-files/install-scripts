@@ -24,20 +24,18 @@ if [[ ! -f "$HOME/install-scripts/logs/anaconda" ]]; then
 		chmod +x ${TEMP_DIR}/Anaconda3-2021.05-Linux-x86_64.sh
 		sh ${TEMP_DIR}/Anaconda3-2021.05-Linux-x86_64.sh -b -p $MODULE_PREFIX/anaconda3
 		touch $HOME/install-scripts/logs/anaconda
-		# rm -rf Anaconda3-2021.05-Linux-x86_64.sh
 	center "${GREEN}Completed${NORMAL}"
 fi
 
 if [[ ! -f "$HOME/install-scripts/logs/env_module" ]]; then
 	center "${GREEN}Downloading Environment Module${NORMAL}"
 		wget https://github.com/cea-hpc/modules/archive/refs/tags/v4.7.1.tar.gz -P ${TEMP_DIR}
-		tar -xvf ${TEMP_DIR}/v4.7.1.tar.gz
+		tar -xvf ${TEMP_DIR}/v4.7.1.tar.gz -C ${TEMP_DIR}
 		cd ${TEMP_DIR}/modules-4.7.1
 		./configure --prefix=$MODULE_PREFIX/environment_modules --modulefilesdir=$MODULE_PREFIX/modules
 		make -j 20 && make install
-		touch $HOME/install-scripts/logs/env_module
 		rm -rf $MODULE_PREFIX/modules
-		# rm -rf v4.7.1.tar.gz modules-4.7.1 $MODULE_PREFIX/modules
+		touch $HOME/install-scripts/logs/env_module
 	center "${GREEN}Completed${NORMAL}"
 fi
 
