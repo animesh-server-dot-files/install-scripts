@@ -107,7 +107,7 @@ fi
 if [[ ! -f "$HOME/install-scripts/logs/samtools_build" ]]; then
 	center "${GREEN}Building Samtools${NORMAL}"
 		cd $MODULE_PREFIX/modules_source/samtools/v1.13/source
-		./configure --prefix $MODULE_PREFIX/modules_source/samtools/v1.13/package
+		./configure --prefix $MODULE_PREFIX/modules_source/samtools/v1.13/package --without-curses
 		make -j 10 && make install
 		make clean
 		touch $HOME/install-scripts/logs/samtools_build
