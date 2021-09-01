@@ -80,8 +80,24 @@ if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 	center "${GREEN}Completed${NORMAL}"
 fi
 
+if [[ ! -f "$HOME/install-scripts/logs/conda_install" ]]; then
+	center "$MODULE_PREFIX/Configuring Anaconda and Installing required packages${NORMAL}"
+		. $MODULE_PREFIX/environment_modules/init/bash
+		module load anaconda/3-2021.05
+		conda config --add channels bioconda
+		conda config --add channels anaconda
+		conda config --add channels conda-forge
+		# conda install --yes -c conda-forge compilers
+		conda install --yes ncurses cmake protobuf boost git
+		conda create --yes -n python_3.9 python=3.9
+		conda create --yes -n python_2.7 python=2.7
+		module unload anaconda/3-2021.05
+		touch $HOME/install-scripts/logs/conda_install
+	center "$MODULE_PREFIX/Completed${NORMAL}"
+fi
+
 if [[ ! -f "$HOME/install-scripts/logs/bwa_build" ]]; then
-	center "${GREEN}Building BWA${NORMAL}"
+	center "$MODULE_PREFIX/Building BWA${NORMAL}"
 		cd $MODULE_PREFIX/modules_source/bwa/v0.7.17/
 		mkdir -p package
 		cd source
@@ -89,22 +105,6 @@ if [[ ! -f "$HOME/install-scripts/logs/bwa_build" ]]; then
 		mv bwa ../package/
 		touch $HOME/install-scripts/logs/bwa_build
 	center "${GREEN}Completed${NORMAL}"
-fi
-
-if [[ ! -f "$HOME/install-scripts/logs/conda_install" ]]; then
-	echo "Configuring Anaconda and Installing required packages"
-		. $MODULE_PREFIX/environment_modules/init/bash
-		module load anaconda/3-2021.05
-		conda config --add channels bioconda
-		conda config --add channels anaconda
-		conda config --add channels conda-forge
-		conda install --yes compilers
-		conda install --yes ncurses cmake protobuf boost git
-		conda create --yes -n python_3.9 python=3.9
-		conda create --yes -n python_2.7 python=2.7
-		module unload anaconda/3-2021.05
-		touch $HOME/install-scripts/logs/conda_install
-	echo "Completed"
 fi
 
 if [[ ! -f "$HOME/install-scripts/logs/seqtk_build" ]]; then
@@ -121,6 +121,7 @@ fi
 if [[ ! -f "$HOME/install-scripts/logs/samtools_build" ]]; then
 	center "${GREEN}Building Samtools${NORMAL}"
 		. $MODULE_PREFIX/environment_modules/init/bash
+		module load anaconda/3-2021.05
 		conda activate base
 		cd $MODULE_PREFIX/modules_source/samtools/v1.13/source
 		./configure --prefix $MODULE_PREFIX/modules_source/samtools/v1.13/package
@@ -140,27 +141,14 @@ if [[ ! -f "$HOME/install-scripts/logs/go_packages" ]]; then
 	center "${GREEN}Completed${NORMAL}"
 fi
 
-if [[ ! -f "$HOME/install-scripts/logs/usher_build" ]]; then
-	echo "Building UShER"
-		cd $MODULE_PREFIX/modules_source/usher/v0.3/source
-		mkdir -p usher_build && cd usher_build
-		cmake -DTBB_DIR=${PWD}/../oneTBB-2019_U9 -DCMAKE_PREFIX_PATH=${PWD}/../oneTBB-2019_U9/cmake ..
-		make -j 20
-		mkdir -p ../../package
-		cp parsimony.pb.h parsimony.pb.cc matOptimize usher matUtils ../../package/
-		cd ../..
-		rm -rf source/usher_build source/oneTBB-2019_U9/cmake/TBBConfig.cmake source/oneTBB-2019_U9/cmake/TBBConfigVersion.cmake
-		touch $HOME/install-scripts/logs/usher_build
-	echo "Completed"
+if [[ ! -f "$HOME/install-scripts/logs/module_bash" ]]; then
+	center "${GREEN}Appending lines to bashrc${NORMAL}"
+		echo 'export MODULE_PREFIX="$HOME/Installed_Package"' >> ~/.bash_profile
+		echo '. $MODULE_PREFIX/environment_modules/init/bash' >> ~/.bash_profile
+		echo "module load python/3.9.5 golang/1.16.4" >> $MODULE_PREFIX/environment_modules/init/modulerc
+		touch $HOME/install-scripts/logs/module_bash
+	center "${GREEN}Completed${NORMAL}"
 fi
-
-
-# echo "Appending lines to bashrc"
-# echo 'export MODULE_PREFIX="$HOME/Installed_Package"' >> ~/.bash_profile
-# echo '. $MODULE_PREFIX/environment_modules/init/bash' >> ~/.bash_profile
-# echo "module load python/3.9.5 golang/1.16.4" >> $MODULE_PREFIX/environment_modules/init/modulerc
-# echo "Completed"
-
 
 # echo "Installing required python packages"
 # module load python/3.9.5
