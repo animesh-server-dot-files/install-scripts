@@ -116,6 +116,7 @@ fi
 
 if [[ ! -f "$HOME/install-scripts/logs/go_packages" ]]; then
 	center "${GREEN}Downloading and Building required go packages${NORMAL}"
+		. $MODULE_PREFIX/environment_modules/init/bash
 		module load golang/1.16.4
 		go get -u -ldflags="-s -w" github.com/gokcehan/lf
 		go get github.com/cov-ert/gofasta
