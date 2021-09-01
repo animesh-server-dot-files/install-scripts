@@ -103,8 +103,6 @@ if [[ ! -f "$HOME/install-scripts/logs/conda_install" ]]; then
 		conda install --yes ncurses cmake protobuf boost git
 		conda create --yes -n python_3.9 python=3.9
 		conda create --yes -n python_2.7 python=2.7
-		# conda activate base
-		# conda deactivate
 		module unload anaconda/3-2021.05
 		touch $HOME/install-scripts/logs/conda_install
 	echo "Completed"
@@ -123,8 +121,10 @@ fi
 
 if [[ ! -f "$HOME/install-scripts/logs/samtools_build" ]]; then
 	center "${GREEN}Building Samtools${NORMAL}"
+		. $MODULE_PREFIX/environment_modules/init/bash
+		conda activate base
 		cd $MODULE_PREFIX/modules_source/samtools/v1.13/source
-		./configure --prefix $MODULE_PREFIX/modules_source/samtools/v1.13/package --without-curses
+		./configure --prefix $MODULE_PREFIX/modules_source/samtools/v1.13/package
 		make -j 10 && make install
 		make clean
 		touch $HOME/install-scripts/logs/samtools_build
