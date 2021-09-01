@@ -81,7 +81,7 @@ if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 fi
 
 if [[ ! -f "$HOME/install-scripts/logs/conda_install" ]]; then
-	center "$MODULE_PREFIX/Configuring Anaconda and Installing required packages${NORMAL}"
+	center "${GREEN}Configuring Anaconda and Installing required packages${NORMAL}"
 		. $MODULE_PREFIX/environment_modules/init/bash
 		module load anaconda/3-2021.05
 		conda config --add channels bioconda
@@ -93,11 +93,11 @@ if [[ ! -f "$HOME/install-scripts/logs/conda_install" ]]; then
 		conda create --yes -n python_2.7 python=2.7
 		module unload anaconda/3-2021.05
 		touch $HOME/install-scripts/logs/conda_install
-	center "$MODULE_PREFIX/Completed${NORMAL}"
+	center "${GREEN}Completed${NORMAL}"
 fi
 
 if [[ ! -f "$HOME/install-scripts/logs/bwa_build" ]]; then
-	center "$MODULE_PREFIX/Building BWA${NORMAL}"
+	center "${GREEN}Building BWA${NORMAL}"
 		cd $MODULE_PREFIX/modules_source/bwa/v0.7.17/
 		mkdir -p package
 		cd source
@@ -124,7 +124,7 @@ if [[ ! -f "$HOME/install-scripts/logs/samtools_build" ]]; then
 		module load anaconda/3-2021.05
 		conda activate base
 		cd $MODULE_PREFIX/modules_source/samtools/v1.13/source
-		./configure --prefix $MODULE_PREFIX/modules_source/samtools/v1.13/package
+		./configure --prefix $MODULE_PREFIX/modules_source/samtools/v1.13/package --without-curses
 		make -j 10 && make install
 		make clean
 		touch $HOME/install-scripts/logs/samtools_build
