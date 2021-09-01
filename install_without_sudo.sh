@@ -42,11 +42,9 @@ fi
 
 if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 	center "${GREEN}Downloading all required modules${NORMAL}"
-		cd $MODULE_PREFIX
 		if [[ ! -d "$MODULE_PREFIX/modules_source" ]]; then
-			git clone --recursive https://github.com/animesh-tool-repo/modules.git modules_source
-		else
-			cd modules_source && git pull --recurse-submodules
+			rm -rf $MODULE_PREFIX/modules_source
+			git clone --recursive https://github.com/animesh-tool-repo/modules.git $MODULE_PREFIX/modules_source
 		fi
 		mkdir -p modules/python
 		mkdir -p modules/golang
