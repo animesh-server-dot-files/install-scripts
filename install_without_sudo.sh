@@ -44,6 +44,9 @@ if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 			rm -rf $MODULE_PREFIX/modules_source
 		fi
 		git clone --recursive https://github.com/animesh-tool-repo/modules.git $MODULE_PREFIX/modules_source
+		if [[ -d "$MODULE_PREFIX/modules" ]]; then
+			rm -rf $MODULE_PREFIX/modules
+		fi
 		mkdir -p $MODULE_PREFIX/modules/python
 		mkdir -p $MODULE_PREFIX/modules/golang
 		mkdir -p $MODULE_PREFIX/modules/nextstrain
