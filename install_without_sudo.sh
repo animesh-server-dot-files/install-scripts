@@ -24,7 +24,6 @@ if [[ ! -f "$HOME/install-scripts/logs/anaconda" ]]; then
 		chmod +x ${TEMP_DIR}/Anaconda3-2021.05-Linux-x86_64.sh
 		sh ${TEMP_DIR}/Anaconda3-2021.05-Linux-x86_64.sh -b -p $MODULE_PREFIX/anaconda3
 		touch $HOME/install-scripts/logs/anaconda
-	center "${GREEN}Completed${NORMAL}"
 fi
 
 if [[ ! -f "$HOME/install-scripts/logs/env_module" ]]; then
@@ -37,7 +36,6 @@ if [[ ! -f "$HOME/install-scripts/logs/env_module" ]]; then
 		make -j 20 && make install
 		rm -rf $MODULE_PREFIX/modules
 		touch $HOME/install-scripts/logs/env_module
-	center "${GREEN}Completed${NORMAL}"
 fi
 
 if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
@@ -78,7 +76,6 @@ if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 		ln $MODULE_PREFIX/modules_source/nextstrain/1.0.0_a9 $MODULE_PREFIX/modules/nextstrain/1.0.0_a9
 
 		touch $HOME/install-scripts/logs/modules
-	center "${GREEN}Completed${NORMAL}"
 fi
 
 if [[ ! -f "$HOME/install-scripts/logs/conda_install" ]]; then
@@ -88,13 +85,12 @@ if [[ ! -f "$HOME/install-scripts/logs/conda_install" ]]; then
 		conda config --add channels bioconda
 		conda config --add channels anaconda
 		conda config --add channels conda-forge
-		# conda install --yes -c conda-forge compilers
 		conda install --yes ncurses cmake protobuf boost git
 		conda create --yes -n python_3.9 python=3.9
 		conda create --yes -n python_2.7 python=2.7
+		conda create --yes -n usher_0.4.6 usher=0.4.6
 		module unload anaconda/3-2021.05
 		touch $HOME/install-scripts/logs/conda_install
-	center "${GREEN}Completed${NORMAL}"
 fi
 
 if [[ ! -f "$HOME/install-scripts/logs/bwa_build" ]]; then
@@ -105,7 +101,6 @@ if [[ ! -f "$HOME/install-scripts/logs/bwa_build" ]]; then
 		make -j 10
 		mv bwa ../package/
 		touch $HOME/install-scripts/logs/bwa_build
-	center "${GREEN}Completed${NORMAL}"
 fi
 
 if [[ ! -f "$HOME/install-scripts/logs/seqtk_build" ]]; then
@@ -116,7 +111,6 @@ if [[ ! -f "$HOME/install-scripts/logs/seqtk_build" ]]; then
 		make -j 10
 		mv seqtk ../package/
 		touch $HOME/install-scripts/logs/seqtk_build
-	center "${GREEN}Completed${NORMAL}"
 fi
 
 if [[ ! -f "$HOME/install-scripts/logs/samtools_build" ]]; then
@@ -129,7 +123,6 @@ if [[ ! -f "$HOME/install-scripts/logs/samtools_build" ]]; then
 		make -j 10 && make install
 		make clean
 		touch $HOME/install-scripts/logs/samtools_build
-	center "${GREEN}Completed${NORMAL}"
 fi
 
 if [[ ! -f "$HOME/install-scripts/logs/go_packages" ]]; then
@@ -139,7 +132,6 @@ if [[ ! -f "$HOME/install-scripts/logs/go_packages" ]]; then
 		go get -u -ldflags="-s -w" github.com/gokcehan/lf
 		go get github.com/cov-ert/gofasta
 		touch $HOME/install-scripts/logs/go_packages
-	center "${GREEN}Completed${NORMAL}"
 fi
 
 if [[ ! -f "$HOME/install-scripts/logs/module_bash" ]]; then
@@ -151,11 +143,11 @@ if [[ ! -f "$HOME/install-scripts/logs/module_bash" ]]; then
 	center "${GREEN}Completed${NORMAL}"
 fi
 
-# echo "Installing required python packages"
-# module load python/3.9.5
-# pip install nextstrain-augur snakemake==6.3.0 tqdm bpytop cython fuzzyset arrow pendulum biopython pytools openpyxl
-# pip install git+https://github.com/cov-lineages/pangolin.git 
-# pip install git+https://github.com/cov-lineages/pangoLEARN.git 
-# pip install git+https://github.com/cov-lineages/scorpio.git 
-# pip install git+https://github.com/cov-lineages/constellations.git
-# echo "Completed"
+	# echo "Installing required python packages"
+	# module load python/3.9.5
+	# pip install nextstrain-augur snakemake==6.3.0 tqdm bpytop cython fuzzyset arrow pendulum biopython pytools openpyxl
+	# pip install git+https://github.com/cov-lineages/pangolin.git 
+	# pip install git+https://github.com/cov-lineages/pangoLEARN.git 
+	# pip install git+https://github.com/cov-lineages/scorpio.git 
+	# pip install git+https://github.com/cov-lineages/constellations.git
+	# echo "Completed"
