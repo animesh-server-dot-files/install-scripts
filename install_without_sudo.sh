@@ -57,9 +57,8 @@ if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 		mkdir -p $MODULE_PREFIX/modules/samtools
 		mkdir -p $MODULE_PREFIX/modules/seqtk
 		ln $MODULE_PREFIX/modules_source/seqtk/1.3 $MODULE_PREFIX/modules/seqtk/1.3
-		ln $MODULE_PREFIX/modules_source/usher/0.3 $MODULE_PREFIX/modules/usher/0.3
 		ln $MODULE_PREFIX/modules_source/bwa/0.7.17 $MODULE_PREFIX/modules/bwa/0.7.17
-		ln $MODULE_PREFIX/modules_source/usher/0.4.4 $MODULE_PREFIX/modules/usher/0.4.4
+		ln $MODULE_PREFIX/modules_source/usher/0.4.6 $MODULE_PREFIX/modules/usher/0.4.6
 		ln $MODULE_PREFIX/modules_source/gatk/3.8.1.0 $MODULE_PREFIX/modules/gatk/3.8.1.0
 		ln $MODULE_PREFIX/modules_source/gatk/4.2.2.0 $MODULE_PREFIX/modules/gatk/4.2.2.0
 		ln $MODULE_PREFIX/modules_source/gatk/4.1.9.0 $MODULE_PREFIX/modules/gatk/4.1.9.0
@@ -143,11 +142,11 @@ if [[ ! -f "$HOME/install-scripts/logs/module_bash" ]]; then
 	center "${GREEN}Completed${NORMAL}"
 fi
 
-	# echo "Installing required python packages"
-	# module load python/3.9.5
-	# pip install nextstrain-augur snakemake==6.3.0 tqdm bpytop cython fuzzyset arrow pendulum biopython pytools openpyxl
-	# pip install git+https://github.com/cov-lineages/pangolin.git 
-	# pip install git+https://github.com/cov-lineages/pangoLEARN.git 
-	# pip install git+https://github.com/cov-lineages/scorpio.git 
-	# pip install git+https://github.com/cov-lineages/constellations.git
-	# echo "Completed"
+# echo "Installing required python packages"
+# module load python/3.9.5
+# pip install nextstrain-augur snakemake==6.3.0 tqdm bpytop cython fuzzyset arrow pendulum biopython pytools openpyxl
+# pip install git+https://github.com/cov-lineages/pangolin.git 
+# pip install git+https://github.com/cov-lineages/pangoLEARN.git 
+# pip install git+https://github.com/cov-lineages/scorpio.git 
+# pip install git+https://github.com/cov-lineages/constellations.git
+# echo "Completed"
