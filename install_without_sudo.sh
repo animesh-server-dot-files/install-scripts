@@ -61,6 +61,7 @@ if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 		ln $MODULE_PREFIX/modules_source/seqtk/1.3 $MODULE_PREFIX/modules/seqtk/1.3
 		ln $MODULE_PREFIX/modules_source/usher/0.3 $MODULE_PREFIX/modules/usher/0.3
 		ln $MODULE_PREFIX/modules_source/bwa/0.7.17 $MODULE_PREFIX/modules/bwa/0.7.17
+		ln $MODULE_PREFIX/modules_source/usher/0.4.4 $MODULE_PREFIX/modules/usher/0.4.4
 		ln $MODULE_PREFIX/modules_source/gatk/3.8.1.0 $MODULE_PREFIX/modules/gatk/3.8.1.0
 		ln $MODULE_PREFIX/modules_source/gatk/4.2.2.0 $MODULE_PREFIX/modules/gatk/4.2.2.0
 		ln $MODULE_PREFIX/modules_source/gatk/4.1.9.0 $MODULE_PREFIX/modules/gatk/4.1.9.0
