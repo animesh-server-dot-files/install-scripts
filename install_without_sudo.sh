@@ -95,20 +95,50 @@ if [[ ! -f "$HOME/install-scripts/logs/bwa_build" ]]; then
 	center "${GREEN}Completed${NORMAL}"
 fi
 
-# echo "Building Seqtk"
-# 	cd $MODULE_PREFIX/modules_source/seqtk/v1.3/
-# 	mkdir -p package
-# 	cd source
-# 	make -j 10
-# 	mv seqtk ../package/
-# echo "Completed"
+if [[ ! -f "$HOME/install-scripts/logs/seqtk_build" ]]; then
+	center "${GREEN}Building Seqtk${NORMAL}"
+		cd $MODULE_PREFIX/modules_source/seqtk/v1.3/
+		mkdir -p package
+		cd source
+		make -j 10
+		mv seqtk ../package/
+		touch $HOME/install-scripts/logs/seqtk_build
+	center "${GREEN}Completed${NORMAL}"
+fi
 
-# echo "Building Samtools"
-# 	cd $MODULE_PREFIX/modules_source/samtools/v1.13/source
-# 	./configure --prefix $MODULE_PREFIX/modules_source/samtools/v1.13/package
-# 	make -j 10 && make install
-# 	make clean
-# echo "Completed"
+if [[ ! -f "$HOME/install-scripts/logs/samtools_build" ]]; then
+	center "${GREEN}Building Samtools${NORMAL}"
+		cd $MODULE_PREFIX/modules_source/samtools/v1.13/source
+		./configure --prefix $MODULE_PREFIX/modules_source/samtools/v1.13/package
+		make -j 10 && make install
+		make clean
+		touch $HOME/install-scripts/logs/samtools_build
+	center "${GREEN}Completed${NORMAL}"
+fi
+
+if [[ ! -f "$HOME/install-scripts/logs/go_packages" ]]; then
+	center "${GREEN}Downloading and Building required go packages${NORMAL}"
+		module load golang/1.16.4
+		go get -u -ldflags="-s -w" github.com/gokcehan/lf
+		go get github.com/cov-ert/gofasta
+		touch $HOME/install-scripts/logs/go_packages
+	center "${GREEN}Completed${NORMAL}"
+fi
+
+# if [[ ! -f "$HOME/install-scripts/logs/usher_build" ]]; then
+# 	echo "Building UShER"
+# 		cd $MODULE_PREFIX/modules_source/usher/v0.3/source
+# 		cd modules/usher/v0.3/source
+# 		mkdir -p usher_build && cd usher_build
+# 		cmake -DTBB_DIR=${PWD}/../oneTBB-2019_U9 -DCMAKE_PREFIX_PATH=${PWD}/../oneTBB-2019_U9/cmake ..
+# 		make -j 20
+# 		mkdir -p ../../package
+# 		cp parsimony.pb.h parsimony.pb.cc matOptimize usher matUtils ../../package/
+# 		cd ../..
+# 		rm -rf source/usher_build source/oneTBB-2019_U9/cmake/TBBConfig.cmake source/oneTBB-2019_U9/cmake/TBBConfigVersion.cmake
+# 		touch $HOME/install-scripts/logs/usher_build
+# 	echo "Completed"
+# fi
 
 # echo "Configuring Anaconda and Installing required packages"
 # 	module load anaconda/3-2021.05
@@ -122,28 +152,12 @@ fi
 # 	module unload anaconda/3-2021.05
 # echo "Completed"
 
-# echo "Downloading and Building required go packages"
-# 	module load golang/1.16.4
-# 	go get -u -ldflags="-s -w" github.com/gokcehan/lf
-# 	go get github.com/cov-ert/gofasta
-# echo "Completed"
-
 # echo "Appending lines to bashrc"
 # echo 'export MODULE_PREFIX="$HOME/Installed_Package"' >> ~/.bash_profile
 # echo '. $MODULE_PREFIX/environment_modules/init/bash' >> ~/.bash_profile
 # echo "module load python/3.9.5 golang/1.16.4" >> $MODULE_PREFIX/environment_modules/init/modulerc
 # echo "Completed"
 
-# echo "Building UShER"
-# cd modules/usher/v0.3/source
-# mkdir -p usher_build && cd usher_build
-# cmake -DTBB_DIR=${PWD}/../oneTBB-2019_U9  -DCMAKE_PREFIX_PATH=${PWD}/../oneTBB-2019_U9/cmake ..
-# make -j 20
-# mkdir -p ../../package
-# cp parsimony.pb.h parsimony.pb.cc matOptimize usher matUtils ../../package/
-# cd ../..
-# rm -rf source/usher_build source/oneTBB-2019_U9/cmake/TBBConfig.cmake source/oneTBB-2019_U9/cmake/TBBConfigVersion.cmake
-# echo "Completed"
 
 # echo "Installing required python packages"
 # module load python/3.9.5
