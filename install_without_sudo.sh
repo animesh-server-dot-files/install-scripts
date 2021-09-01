@@ -84,13 +84,16 @@ if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 	center "${GREEN}Completed${NORMAL}"
 fi
 
-# echo "Building BWA"
-# 	cd $MODULE_PREFIX/modules_source/bwa/v0.7.17/
-# 	mkdir -p package
-# 	cd source
-# 	make -j 10
-# 	mv bwa bwa.1 ../package/
-# echo "Completed"
+if [[ ! -f "$HOME/install-scripts/logs/bwa_build" ]]; then
+	center "${GREEN}Building BWA${NORMAL}"
+		cd $MODULE_PREFIX/modules_source/bwa/v0.7.17/
+		mkdir -p package
+		cd source
+		make -j 10
+		mv bwa ../package/
+		touch $HOME/install-scripts/logs/bwa_build
+	center "${GREEN}Completed${NORMAL}"
+fi
 
 # echo "Building Seqtk"
 # 	cd $MODULE_PREFIX/modules_source/seqtk/v1.3/
