@@ -29,6 +29,7 @@ fi
 
 if [[ ! -f "$HOME/install-scripts/logs/env_module" ]]; then
 	center "${GREEN}Downloading Environment Module${NORMAL}"
+		rm -rf ${TEMP_DIR}/v4.7.1.tar.gz ${TEMP_DIR}/modules-4.7.1
 		wget https://github.com/cea-hpc/modules/archive/refs/tags/v4.7.1.tar.gz -P ${TEMP_DIR}
 		tar -xvf ${TEMP_DIR}/v4.7.1.tar.gz -C ${TEMP_DIR}
 		cd ${TEMP_DIR}/modules-4.7.1
