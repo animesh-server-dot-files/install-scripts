@@ -77,7 +77,6 @@ if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 		ln modules_source/nextstrain/1.2.3 modules/nextstrain/1.2.3
 		ln modules_source/nextstrain/1.0.0_a9 modules/nextstrain/1.0.0_a9
 
-		. $MODULE_PREFIX/environment_modules/init/bash
 		touch $HOME/install-scripts/logs/modules
 	center "${GREEN}Completed${NORMAL}"
 fi
@@ -91,6 +90,24 @@ if [[ ! -f "$HOME/install-scripts/logs/bwa_build" ]]; then
 		mv bwa ../package/
 		touch $HOME/install-scripts/logs/bwa_build
 	center "${GREEN}Completed${NORMAL}"
+fi
+
+if [[ ! -f "$HOME/install-scripts/logs/conda_install" ]]; then
+	echo "Configuring Anaconda and Installing required packages"
+		. $MODULE_PREFIX/environment_modules/init/bash
+		module load anaconda/3-2021.05
+		conda config --add channels bioconda
+		conda config --add channels anaconda
+		conda config --add channels conda-forge
+		conda install --yes compilers
+		conda install --yes ncurses cmake protobuf boost git
+		conda create --yes -n python_3.9 python=3.9
+		conda create --yes -n python_2.7 python=2.7
+		# conda activate base
+		# conda deactivate
+		module unload anaconda/3-2021.05
+		touch $HOME/install-scripts/logs/conda_install
+	echo "Completed"
 fi
 
 if [[ ! -f "$HOME/install-scripts/logs/seqtk_build" ]]; then
@@ -124,32 +141,20 @@ if [[ ! -f "$HOME/install-scripts/logs/go_packages" ]]; then
 	center "${GREEN}Completed${NORMAL}"
 fi
 
-# if [[ ! -f "$HOME/install-scripts/logs/usher_build" ]]; then
-# 	echo "Building UShER"
-# 		cd $MODULE_PREFIX/modules_source/usher/v0.3/source
-# 		cd modules/usher/v0.3/source
-# 		mkdir -p usher_build && cd usher_build
-# 		cmake -DTBB_DIR=${PWD}/../oneTBB-2019_U9 -DCMAKE_PREFIX_PATH=${PWD}/../oneTBB-2019_U9/cmake ..
-# 		make -j 20
-# 		mkdir -p ../../package
-# 		cp parsimony.pb.h parsimony.pb.cc matOptimize usher matUtils ../../package/
-# 		cd ../..
-# 		rm -rf source/usher_build source/oneTBB-2019_U9/cmake/TBBConfig.cmake source/oneTBB-2019_U9/cmake/TBBConfigVersion.cmake
-# 		touch $HOME/install-scripts/logs/usher_build
-# 	echo "Completed"
-# fi
+if [[ ! -f "$HOME/install-scripts/logs/usher_build" ]]; then
+	echo "Building UShER"
+		cd $MODULE_PREFIX/modules_source/usher/v0.3/source
+		mkdir -p usher_build && cd usher_build
+		cmake -DTBB_DIR=${PWD}/../oneTBB-2019_U9 -DCMAKE_PREFIX_PATH=${PWD}/../oneTBB-2019_U9/cmake ..
+		make -j 20
+		mkdir -p ../../package
+		cp parsimony.pb.h parsimony.pb.cc matOptimize usher matUtils ../../package/
+		cd ../..
+		rm -rf source/usher_build source/oneTBB-2019_U9/cmake/TBBConfig.cmake source/oneTBB-2019_U9/cmake/TBBConfigVersion.cmake
+		touch $HOME/install-scripts/logs/usher_build
+	echo "Completed"
+fi
 
-# echo "Configuring Anaconda and Installing required packages"
-# 	module load anaconda/3-2021.05
-# 	conda create --yes -n python_3.9 python=3.9
-# 	conda create --yes -n python_2.7 python=2.7
-# 	conda config --add channels conda-forge
-# 	conda config --add channels bioconda
-# 	conda activate python_3.9
-# 	conda install --yes mafft iqtree minimap2 cmake protobuf gcc_linux-64 git
-# 	conda deactivate
-# 	module unload anaconda/3-2021.05
-# echo "Completed"
 
 # echo "Appending lines to bashrc"
 # echo 'export MODULE_PREFIX="$HOME/Installed_Package"' >> ~/.bash_profile
