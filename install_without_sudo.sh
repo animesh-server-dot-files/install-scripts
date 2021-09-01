@@ -46,35 +46,35 @@ if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 			rm -rf $MODULE_PREFIX/modules_source
 		fi
 		git clone --recursive https://github.com/animesh-tool-repo/modules.git $MODULE_PREFIX/modules_source
-		mkdir -p modules/python
-		mkdir -p modules/golang
-		mkdir -p modules/nextstrain
-		mkdir -p modules/usher
-		mkdir -p modules/anaconda
-		mkdir -p modules/bwa
-		mkdir -p modules/fastqc
-		mkdir -p modules/gatk
-		mkdir -p modules/picard
-		mkdir -p modules/rclone
-		mkdir -p modules/samtools
-		mkdir -p modules/seqtk
-		ln modules_source/seqtk/1.3 modules/seqtk/1.3
-		ln modules_source/usher/0.3 modules/usher/0.3
-		ln modules_source/bwa/0.7.17 modules/bwa/0.7.17
-		ln modules_source/gatk/3.8.1.0 modules/gatk/3.8.1.0
-		ln modules_source/gatk/4.2.2.0 modules/gatk/4.2.2.0
-		ln modules_source/gatk/4.1.9.0 modules/gatk/4.1.9.0
-		ln modules_source/samtools/1.13 modules/samtools/1.13
-		ln modules_source/rclone/1.56.0 modules/rclone/1.56.0
-		ln modules_source/fastqc/0.11.9 modules/fastqc/0.11.9
-		ln modules_source/golang/1.16.4 modules/golang/1.16.4
-		ln modules_source/python/3.9.5 modules/python/3.9.5
-		ln modules_source/python/2.7.18 modules/python/2.7.18
-		ln modules_source/picard/2.24.0 modules/picard/2.24.0
-		ln modules_source/picard/2.26.0 modules/picard/2.26.0
-		ln modules_source/anaconda/3-2021.05 modules/anaconda/3-2021.05
-		ln modules_source/nextstrain/1.2.3 modules/nextstrain/1.2.3
-		ln modules_source/nextstrain/1.0.0_a9 modules/nextstrain/1.0.0_a9
+		mkdir -p $MODULE_PREFIX/modules/python
+		mkdir -p $MODULE_PREFIX/modules/golang
+		mkdir -p $MODULE_PREFIX/modules/nextstrain
+		mkdir -p $MODULE_PREFIX/modules/usher
+		mkdir -p $MODULE_PREFIX/modules/anaconda
+		mkdir -p $MODULE_PREFIX/modules/bwa
+		mkdir -p $MODULE_PREFIX/modules/fastqc
+		mkdir -p $MODULE_PREFIX/modules/gatk
+		mkdir -p $MODULE_PREFIX/modules/picard
+		mkdir -p $MODULE_PREFIX/modules/rclone
+		mkdir -p $MODULE_PREFIX/modules/samtools
+		mkdir -p $MODULE_PREFIX/modules/seqtk
+		ln $MODULE_PREFIX/modules_source/seqtk/1.3 $MODULE_PREFIX/modules/seqtk/1.3
+		ln $MODULE_PREFIX/modules_source/usher/0.3 $MODULE_PREFIX/modules/usher/0.3
+		ln $MODULE_PREFIX/modules_source/bwa/0.7.17 $MODULE_PREFIX/modules/bwa/0.7.17
+		ln $MODULE_PREFIX/modules_source/gatk/3.8.1.0 $MODULE_PREFIX/modules/gatk/3.8.1.0
+		ln $MODULE_PREFIX/modules_source/gatk/4.2.2.0 $MODULE_PREFIX/modules/gatk/4.2.2.0
+		ln $MODULE_PREFIX/modules_source/gatk/4.1.9.0 $MODULE_PREFIX/modules/gatk/4.1.9.0
+		ln $MODULE_PREFIX/modules_source/samtools/1.13 $MODULE_PREFIX/modules/samtools/1.13
+		ln $MODULE_PREFIX/modules_source/rclone/1.56.0 $MODULE_PREFIX/modules/rclone/1.56.0
+		ln $MODULE_PREFIX/modules_source/fastqc/0.11.9 $MODULE_PREFIX/modules/fastqc/0.11.9
+		ln $MODULE_PREFIX/modules_source/golang/1.16.4 $MODULE_PREFIX/modules/golang/1.16.4
+		ln $MODULE_PREFIX/modules_source/python/3.9.5 $MODULE_PREFIX/modules/python/3.9.5
+		ln $MODULE_PREFIX/modules_source/python/2.7.18 $MODULE_PREFIX/modules/python/2.7.18
+		ln $MODULE_PREFIX/modules_source/picard/2.24.0 $MODULE_PREFIX/modules/picard/2.24.0
+		ln $MODULE_PREFIX/modules_source/picard/2.26.0 $MODULE_PREFIX/modules/picard/2.26.0
+		ln $MODULE_PREFIX/modules_source/anaconda/3-2021.05 $MODULE_PREFIX/modules/anaconda/3-2021.05
+		ln $MODULE_PREFIX/modules_source/nextstrain/1.2.3 $MODULE_PREFIX/modules/nextstrain/1.2.3
+		ln $MODULE_PREFIX/modules_source/nextstrain/1.0.0_a9 $MODULE_PREFIX/modules/nextstrain/1.0.0_a9
 
 		touch $HOME/install-scripts/logs/modules
 	center "${GREEN}Completed${NORMAL}"
