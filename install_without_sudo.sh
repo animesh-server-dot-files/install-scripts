@@ -44,8 +44,8 @@ if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 	center "${GREEN}Downloading all required modules${NORMAL}"
 		if [[ -d "$MODULE_PREFIX/modules_source" ]]; then
 			rm -rf $MODULE_PREFIX/modules_source
-			git clone --recursive https://github.com/animesh-tool-repo/modules.git $MODULE_PREFIX/modules_source
 		fi
+		git clone --recursive https://github.com/animesh-tool-repo/modules.git $MODULE_PREFIX/modules_source
 		mkdir -p modules/python
 		mkdir -p modules/golang
 		mkdir -p modules/nextstrain
