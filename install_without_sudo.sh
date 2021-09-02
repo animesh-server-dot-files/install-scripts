@@ -91,8 +91,21 @@ if [[ ! -f "$HOME/install-scripts/logs/conda_install" ]]; then
 		conda create --yes -n python_3.9 python=3.9
 		conda create --yes -n python_2.7 python=2.7
 		conda create --yes -n usher_0.4.6 usher=0.4.6
+		conda activate python_3.9
+		conda install git git-lfs
+		git install lfs
 		module unload anaconda/3-2021.05
 		touch $HOME/install-scripts/logs/conda_install
+fi
+
+if [[ ! -f "$HOME/install-scripts/logs/gatk_download" ]]; then
+	center "${GREEN}Downloading the files for GATK v3 and v4${NORMAL}"
+		. $MODULE_PREFIX/environment_modules/init/bash
+		module load anaconda/3-2021.05
+		cd $MODULE_PREFIX/modules_source/gatk
+		git lfs pull
+		module unload anaconda/3-2021.05
+		touch $HOME/install-scripts/logs/gatk_download
 fi
 
 if [[ ! -f "$HOME/install-scripts/logs/bwa_build" ]]; then
