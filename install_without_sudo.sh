@@ -101,7 +101,7 @@ if [[ ! -f "$HOME/install-scripts/logs/gatk_download" ]]; then
 		module load anaconda/3-2021.05
 		conda activate base
 		cd $MODULE_PREFIX/modules_source/gatk
-		git install lfs
+		git-lfs install
 		git lfs pull
 		module unload anaconda/3-2021.05
 		touch $HOME/install-scripts/logs/gatk_download
