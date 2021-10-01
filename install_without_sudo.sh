@@ -59,6 +59,10 @@ if [[ ! -f "$HOME/install-scripts/logs/modules" ]]; then
 		mkdir -p $MODULE_PREFIX/modules/rclone
 		mkdir -p $MODULE_PREFIX/modules/samtools
 		mkdir -p $MODULE_PREFIX/modules/seqtk
+		mkdir -p $MODULE_PREFIX/modules/java
+		ln $MODULE_PREFIX/modules_source/java/7 $MODULE_PREFIX/modules/java/7
+		ln $MODULE_PREFIX/modules_source/java/8 $MODULE_PREFIX/modules/java/8
+		ln $MODULE_PREFIX/modules_source/java/11 $MODULE_PREFIX/modules/java/11
 		ln $MODULE_PREFIX/modules_source/seqtk/1.3 $MODULE_PREFIX/modules/seqtk/1.3
 		ln $MODULE_PREFIX/modules_source/bwa/0.7.17 $MODULE_PREFIX/modules/bwa/0.7.17
 		ln $MODULE_PREFIX/modules_source/usher/0.4.6 $MODULE_PREFIX/modules/usher/0.4.6
@@ -91,6 +95,9 @@ if [[ ! -f "$HOME/install-scripts/logs/conda_install" ]]; then
 		conda create --yes -n python_3.9 python=3.9
 		conda create --yes -n python_2.7 python=2.7
 		conda create --yes -n usher_0.4.6 usher=0.4.6
+		conda create --yes -n jdk_11 openjdk=11
+		conda create --yes -n jdk_8 openjdk=8
+		conda create --yes -n jdk_7 openjdk=7
 		module unload anaconda/3-2021.05
 		touch $HOME/install-scripts/logs/conda_install
 fi
